@@ -1,52 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-interface RichTextEditorProps {
+export default function RichTextEditor({
+  value,
+  onChange,
+}: {
   value: string;
-  onChange: (value: string) => void;
-}
-
-export default function RichTextEditor({ value, onChange }: RichTextEditorProps) {
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      ['blockquote', 'code-block'],
-      ['link', 'image'],
-      ['clean'],
-    ],
-  };
-
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'list',
-    'bullet',
-    'blockquote',
-    'code-block',
-    'link',
-    'image',
-  ];
-
+  onChange: (v: string) => void;
+}) {
   return (
-    <div className="bg-nfl-dark rounded-lg">
-      <ReactQuill
-        theme="snow"
-        value={value}
-        onChange={onChange}
-        modules={modules}
-        formats={formats}
-        placeholder="Write your unfiltered NFL take..."
-      />
+    <div>
+      <ReactQuill theme="snow" value={value} onChange={onChange} />
     </div>
   );
 }
